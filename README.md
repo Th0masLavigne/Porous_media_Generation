@@ -6,7 +6,11 @@ This repository contains the codes used for:
 - the creation of [porous cylinders](./Cylinder/reamde.md) thought to be the samples for my first PhD experiment, as well as the ones for the experimental and numerical evaluation of the permeabilitty,
 - the [permeabilitty evaluation](./Permeabilitty_Evaluation/reamde.md) procedure (c and python codes)
 
-## Creation of a tesselation
+## Generation of a Porous media: pipeline
+
+![image](https://github.com/Th0masLavigne/Porous_media_Generation_and_properties/blob/main/Pipeline.png)
+
+### Creation of a tesselation
 
 The creation of the tesselation is based on the use of [Neper](https://neper.info/) open-source software. See the [link](https://neper.info/) for further examples. 
 
@@ -28,4 +32,8 @@ An example of a command is:
 ```
 
 
-## Creation of a porous medium from a tesselation
+### Creation of a porous medium from a tesselation
+
+
+
+### From a surface mesh to a particle volume
