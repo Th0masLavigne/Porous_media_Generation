@@ -9,6 +9,8 @@ This repository contains the codes used for:
 ## Generation of a Porous media: pipeline
 
 ![image](https://github.com/Th0masLavigne/Porous_media_Generation_and_properties/blob/main/Pipeline.png)
+> *Graphical representation of the route followed for the creation of the porous scaffold. Blue elements correspond to the neper environment and red elements to the pymesh environment.*
+
 
 ### Creation of a tesselation
 
