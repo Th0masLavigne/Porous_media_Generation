@@ -8,6 +8,8 @@ This repository contains the codes used for:
 
 ## Generation of a Porous media: pipeline
 
+The next sub-sections briefly present the overall method for the presented pipeline. At first, a domain is tesselated. Vertices and Edges are then used to create 
+
 ![image](https://github.com/Th0masLavigne/Porous_media_Generation_and_properties/blob/main/Pipeline.png)
 > *Graphical representation of the route followed for the creation of the porous scaffold. Blue elements correspond to the neper environment and red elements to the pymesh environment.*
 
@@ -30,12 +32,31 @@ Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
 An example of a command is:
 
 ```bash
-
+neper -T -n $N -morpho $Law -domain $DOMAIN
 ```
+
+where `$N` is the required number of seeds to fill a specified `$DOMAIN` given a method `$LAW`. Here after are example of:
+- `LAW`=
+	- `"diameq:dirac(1),1-sphericity:lognormal(0.145,0.03)"` specifies the sphericity, it is a regularization of the pores' size
+	- `"voronoi"` is a voronoi tesselation
+- `$DOMAIN`=
+	- `"cube({Lx},{Ly},{Lz})"` creates a cubic domain
+	- `"cylinder({Lz},{2*Lx})"` computes a cylinder
+	- boolean operations can be applied. See the [documentation](https://neper.info/).
 
 
 ### Creation of a porous medium from a tesselation
 
 
+Further information can be found in [Pymesh documentation](https://pymesh.readthedocs.io/en/latest/).
 
-### From a surface mesh to a particle volume
+
+
+### Other methods
+inflate 
+blender truc
+
+
+Further information can be found in [Pymesh documentation](https://pymesh.readthedocs.io/en/latest/).
+
+## From a surface mesh to a particle volume
