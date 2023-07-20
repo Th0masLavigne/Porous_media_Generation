@@ -93,7 +93,7 @@ if __name__ == "__main__"  :
 		        # 	iter_+=1
 		        # 	if iter_>maxiter:
 		        # 		break
-		        mesh_perm, mesh_perm_top, mesh_perm_bottom = create_permeabilitty_sample_ANAS(vertices, edges, radius, Height, rad_i_tube, rad_e_tube, Length_tube, Diameter, Diameter_connector_mm, Diameter_connector_i, Length_connector,chamber_height,chamber_width, Ncyl, Nsph, output_filename_perm)
+		        mesh_perm = create_permeabilitty_sample_ANAS(vertices, edges, radius, Height, rad_i_tube, rad_e_tube, Length_tube, Diameter, Diameter_connector_mm, Diameter_connector_i, Length_connector,chamber_height,chamber_width, Ncyl, Nsph, output_filename_perm)
 		        print("Clean middle part")
 		        mesh_inter = mesh_perm
 		        manifold=False
