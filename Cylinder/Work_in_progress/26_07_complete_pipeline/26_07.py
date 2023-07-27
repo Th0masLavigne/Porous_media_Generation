@@ -70,4 +70,5 @@ if __name__ == "__main__"  :
 			os.mkdir(fold_name)
 		except:
 			pass
-		UL_convert_files([output_filename_perm],fold_name+'/xp', fold_name+'/chip', i_res=resolution_order, parallel= False)
+		# UL_convert_files([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', number_of_seeds, i_res=resolution_order, parallel= False)
+		UL_convert_files_cyl([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', 0.9*Diameter, number_of_seeds, i_res=resolution_order, parallel= False)

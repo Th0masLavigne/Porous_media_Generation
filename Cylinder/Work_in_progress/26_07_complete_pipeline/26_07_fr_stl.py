@@ -15,10 +15,12 @@ if __name__ == "__main__"  :
 		# Define the outputs file names for the merged mesh, the boolean (CSG) mesh and the cleaned one
 		output_filename_perm = str(number_of_seeds)+'_seed_permeabilitty.stl'
 		#
-		resolution_order = 5
-		fold_name = 'n'+str(number_of_seeds)+'seed_'+str(resolution_order)+'_vx'
+		resolution_order = 7
+		fold_name = 'n'+str(number_of_seeds)+'seed_'+str(2**(resolution_order+1))+'_vx'
 		try: 
 			os.mkdir(fold_name)
 		except:
 			pass
-		UL_convert_files([output_filename_perm],fold_name+'/xp', fold_name+'/chip', i_res=resolution_order, parallel= False)
+		#UL_convert_files([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', number_of_seeds, i_res=resolution_order, parallel= False)
+		Diameter = 24e-3
+		UL_convert_files_cyl([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', Diameter, 0.9*Diameter, number_of_seeds, i_res=resolution_order, parallel= False)
