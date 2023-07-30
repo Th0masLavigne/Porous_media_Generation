@@ -27,4 +27,4 @@ if __name__ == "__main__"  :
 		chamber_height = 10e-3
 		#UL_convert_files_cyl([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', Diameter, 0.9*Diameter, number_of_seeds, i_res=resolution_order, parallel= False)
 		# UL_convert_files_cyl_2([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', Diameter, 0.9*Diameter, number_of_seeds, resolution_expected=res_ex, parallel=False)
-		UL_convert_files_cyl_3([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', Diameter, 0.9*Diameter, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=1e-4, parallel=False)
+		UL_convert_files_cyl_3([output_filename_perm],fold_name+'/xp', fold_name+'/chip', fold_name+'/meta', Diameter, 0.9*Diameter, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=1e-3, parallel=False)
