@@ -299,6 +299,8 @@ def UL_convert_files_cyl_4(input_file_paths, output_file_path, output_file_path_
                     if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-(0.9*external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
                         output.write('%s\t%s\t%s\t' % tuple(point))
                         output_voxel.write('%s\t' % voxels_cut[z][y][x])
+                    else:
+                        voxels_cut[z][y][x]=3
     # 
     output_meta.write('seeding number: ')
     output_meta.write('%s\n' % seedn)
@@ -349,7 +351,7 @@ def UL_convert_files_cyl_4_debug(input_file_paths, output_file_path, output_file
                     point = (np.array([x, y, z]) / scale) # + shift
                     # tag external of cylinder as ssolid to avoid flow
                     center_cyl = np.array([Diameter/2, Diameter/2])
-                    if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-(0.9*external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
+                    if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-0.95*(external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
                         if voxels_cut[z][y][x]!=0:
                             in_x.append(x / scale[0])
                             in_y.append(y/ scale[1])

@@ -20,8 +20,8 @@ if __name__ == "__main__"  :
 		Diameter = 24e-3
 		chamber_height = 10e-3
 		chamber_width  = 0.75e-3
-		voxel_size = 1e-3
-		# voxel_size = 2e-4
+		# voxel_size = 1e-3
+		voxel_size = 2e-4
 		res_ex = int(1e-3/voxel_size)
 		fold_name = 'n'+str(number_of_seeds)+'seed_'+ str(res_ex)+'_vx_per_mm_4'
 		try: 
