@@ -258,6 +258,11 @@ def UL_convert_files_cyl_3(input_file_paths, output_file_path, output_file_path_
     tif_matrix = np.asarray(voxels_cut,dtype=np.float32)
     imsave('voxelized_cyl_3.tif', tif_matrix)
 
+def enforce_size_x_y(voxels):
+    # Expectation, the idx_L is already known when asking the resolution
+    voxels_cut = voxels[:,:min(voxels.shape[0],voxels.shape[1]),:min(voxels.shape[0],voxels.shape[1])]
+    res_vec = [voxels_cut.shape[2],voxels_cut.shape[1],voxels_cut.shape[0]]
+    return voxels_cut, res_vec
 
 def UL_convert_files_cyl_4(input_file_paths, output_file_path, output_file_path_voxel, output_file_path_meta, Diameter, external_Diameter, seedn, chamber_height, expected_inlet_vx=6, voxel_size__=1e-3, parallel=False):
     import stltovoxel
@@ -281,6 +286,7 @@ def UL_convert_files_cyl_4(input_file_paths, output_file_path, output_file_path_
     voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
     # padding
     voxels_cut, res_vec = cut_before_inlet(voxels, scale, chamber_height, expected_inlet_vx)
+    voxels_cut, res_vec = enforce_size_x_y(voxels)
     voxels_cut[0,:,:]=voxels_cut[1,:,:]
     voxels_cut[voxels_cut.shape[0]-2:,:,:]=voxels_cut[voxels_cut.shape[0]-3,:,:]
     in_x, in_y, in_z, out_x, out_y, out_z = [], [], [], [], [], []
@@ -333,6 +339,7 @@ def UL_convert_files_cyl_4_debug(input_file_paths, output_file_path, output_file
     voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
     # padding
     voxels_cut, res_vec = cut_before_inlet(voxels, scale, chamber_height, expected_inlet_vx)
+    voxels_cut, res_vec = enforce_size_x_y(voxels)
     voxels_cut[0,:,:]=voxels_cut[1,:,:]
     voxels_cut[voxels_cut.shape[0]-2:,:,:]=voxels_cut[voxels_cut.shape[0]-3,:,:]
     in_x, in_y, in_z, out_x, out_y, out_z = [], [], [], [], [], []
