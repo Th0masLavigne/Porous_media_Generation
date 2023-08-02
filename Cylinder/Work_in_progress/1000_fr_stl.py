@@ -34,5 +34,7 @@ if __name__ == "__main__"  :
 		# 											fold_name+'/meta', Diameter, 0.9*Diameter, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=1e-3, parallel=False)
 		# UL_convert_files_cyl_4_debug([output_filename_perm],fold_name+'/xp', fold_name+'/chip',
 		# 											fold_name+'/meta', Diameter, Diameter+2*chamber_width, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=voxel_size, parallel=False)
-		UL_convert_files_cyl_4([output_filename_perm],fold_name+'/xp', fold_name+'/chip',
-													fold_name+'/meta', Diameter, Diameter+2*chamber_width, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=voxel_size, parallel=False)
+		# UL_convert_files_cyl_4([output_filename_perm],fold_name+'/xp', fold_name+'/chip',
+		# 											fold_name+'/meta', Diameter, 0.95*Diameter, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=voxel_size, parallel=False)
+		UL_convert_files_cyl_5([output_filename_perm],fold_name+'/xp', fold_name+'/chip',
+													fold_name+'/meta', Diameter, 0.95*Diameter+2*chamber_width, number_of_seeds, chamber_height, expected_inlet_vx=6, voxel_size__=voxel_size, parallel=False)
