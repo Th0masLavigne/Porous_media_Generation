@@ -97,7 +97,7 @@ def UL_convert_files_cyl(input_file_paths, output_file_path, output_file_path_vo
                     point = (np.array([x, y, z]) / scale) # + shift
                     # tag external of cylinder as ssolid to avoid flow
                     center_cyl = np.array([Diameter/2, Diameter/2])
-                    xp_m_offset = np.array([(x-offset[2])/scale[2], (y-offset[1])/scale[1]]) # + shift
+                    xp_m_offset = np.array([(x+ shift[0]-offset[2])/scale[0], (y+ shift[1]-offset[1])/scale[1]]) # + shift
                     if np.linalg.norm(xp_m_offset-center_cyl)-internal_Diameter/2 >= 0:
                         pad[z][y][x]=1
                     output.write('%s\t%s\t%s\t' % tuple(point))
@@ -175,7 +175,7 @@ def UL_convert_files_cyl_2(input_file_paths, output_file_path, output_file_path_
                     point = (np.array([x, y, z]) / scale) # + shift
                     # tag external of cylinder as ssolid to avoid flow
                     center_cyl = np.array([Diameter/2, Diameter/2])
-                    xp_m_offset = np.array([(x-offset[2])/scale[2], (y-offset[1])/scale[1]]) # + shift
+                    xp_m_offset = np.array([(x+ shift[0]-offset[2])/scale[0], (y+ shift[1]-offset[1])/scale[1]]) # + shift
                     if np.linalg.norm(xp_m_offset-center_cyl)-internal_Diameter/2 >= 0:
                         pad[z][y][x]=1
                     output.write('%s\t%s\t%s\t' % tuple(point))
@@ -237,7 +237,7 @@ def UL_convert_files_cyl_3(input_file_paths, output_file_path, output_file_path_
                     point = (np.array([x, y, z]) / scale) # + shift
                     # tag external of cylinder as ssolid to avoid flow
                     center_cyl = np.array([Diameter/2, Diameter/2])
-                    if np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-internal_Diameter/2 >= 0:
+                    if np.linalg.norm([x/scale[0]+shift[0],y/scale[1]+shift[1]]-center_cyl)-internal_Diameter/2 >= 0:
                         voxels_cut[z][y][x]=1
                     output.write('%s\t%s\t%s\t' % tuple(point))
                     output_voxel.write('%s\t' % voxels_cut[z][y][x])
