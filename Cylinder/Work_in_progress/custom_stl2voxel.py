@@ -392,7 +392,6 @@ def UL_convert_files_cyl_5(input_file_paths, output_file_path, output_file_path_
     # 
     resolution = int(round(ROI[idx_L]/voxel_size__))
     voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
-    print(scale,shift)
     voxels[0,:,:]=voxels[1,:,:]
     voxels[voxels.shape[0]-2:,:,:]=voxels[voxels.shape[0]-3,:,:]
     # padding
