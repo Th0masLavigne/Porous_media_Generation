@@ -202,6 +202,7 @@ def cut_before_inlet(voxels, voxel_size, chamber_height, expected_inlet_vx):
     for ii in range(2,voxels.shape[0]-1):
         if np.sum(voxels[ii,:,:])<np.sum(voxels[ii+1,:,:]):
             begin_porous = ii
+            print(begin_porous)
             break
     voxels_cut = voxels[begin_porous-(expected_inlet_vx-1):,:,:]
     res_vec = [voxels_cut.shape[2],voxels_cut.shape[1],voxels_cut.shape[0]]
@@ -229,7 +230,6 @@ def UL_convert_files_cyl_3(input_file_paths, output_file_path, output_file_path_
     resolution = int(round(ROI[idx_L]/voxel_size__))
     voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
     # padding
-    voxels_cut, res_vec = cut_before_inlet(voxels, scale, chamber_height, expected_inlet_vx)
     voxels_cut[0,:,:]=voxels_cut[1,:,:]
     voxels_cut[voxels_cut.shape[0]-2:,:,:]=voxels_cut[voxels_cut.shape[0]-3,:,:]
     for z in range(voxels_cut.shape[0]):
@@ -284,11 +284,10 @@ def UL_convert_files_cyl_4(input_file_paths, output_file_path, output_file_path_
     # 
     resolution = int(round(ROI[idx_L]/voxel_size__))
     voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
+    voxels[0,:,:]=voxels[1,:,:]
+    voxels[voxels.shape[0]-2:,:,:]=voxels[voxels.shape[0]-3,:,:]
     # padding
     voxels_cut, res_vec = cut_before_inlet(voxels, scale, chamber_height, expected_inlet_vx)
-    voxels_cut, res_vec = enforce_size_x_y(voxels)
-    voxels_cut[0,:,:]=voxels_cut[1,:,:]
-    voxels_cut[voxels_cut.shape[0]-2:,:,:]=voxels_cut[voxels_cut.shape[0]-3,:,:]
     in_x, in_y, in_z, out_x, out_y, out_z = [], [], [], [], [], []
     for z in range(voxels_cut.shape[0]):
         for y in range(voxels_cut.shape[1]):
@@ -296,12 +295,13 @@ def UL_convert_files_cyl_4(input_file_paths, output_file_path, output_file_path_
                     point = (np.array([x, y, z]) / scale) # + shift
                     # tag external of cylinder as ssolid to avoid flow
                     center_cyl = np.array([Diameter/2, Diameter/2])
-                    if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-(0.9*external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
+                    if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-(external_Diameter)/2 >= voxel_size__/2 and voxels_cut[z][y][x]==0):
                         output.write('%s\t%s\t%s\t' % tuple(point))
                         output_voxel.write('%s\t' % voxels_cut[z][y][x])
                     else:
                         voxels_cut[z][y][x]=3
     # 
+    voxels_cut, res_vec = enforce_size_x_y(voxels_cut)
     output_meta.write('seeding number: ')
     output_meta.write('%s\n' % seedn)
     output_meta.write('Voxel size = vx/m : ')
@@ -339,11 +339,10 @@ def UL_convert_files_cyl_4_debug(input_file_paths, output_file_path, output_file
     # 
     resolution = int(round(ROI[idx_L]/voxel_size__))
     voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
+    voxels[0,:,:]=voxels[1,:,:]
+    voxels[voxels.shape[0]-2:,:,:]=voxels[voxels.shape[0]-3,:,:]
     # padding
     voxels_cut, res_vec = cut_before_inlet(voxels, scale, chamber_height, expected_inlet_vx)
-    voxels_cut, res_vec = enforce_size_x_y(voxels)
-    voxels_cut[0,:,:]=voxels_cut[1,:,:]
-    voxels_cut[voxels_cut.shape[0]-2:,:,:]=voxels_cut[voxels_cut.shape[0]-3,:,:]
     in_x, in_y, in_z, out_x, out_y, out_z = [], [], [], [], [], []
     for z in range(voxels_cut.shape[0]):
         for y in range(voxels_cut.shape[1]):
@@ -351,7 +350,7 @@ def UL_convert_files_cyl_4_debug(input_file_paths, output_file_path, output_file
                     point = (np.array([x, y, z]) / scale) # + shift
                     # tag external of cylinder as ssolid to avoid flow
                     center_cyl = np.array([Diameter/2, Diameter/2])
-                    if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-0.95*(external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
+                    if not (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-(external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
                         if voxels_cut[z][y][x]!=0:
                             in_x.append(x / scale[0])
                             in_y.append(y/ scale[1])
@@ -363,6 +362,7 @@ def UL_convert_files_cyl_4_debug(input_file_paths, output_file_path, output_file
                         output.write('%s\t%s\t%s\t' % tuple(point))
                         output_voxel.write('%s\t' % voxels_cut[z][y][x])
     # 
+    voxels_cut, res_vec = enforce_size_x_y(voxels_cut)
     import matplotlib.pyplot as plt
     import numpy as np
     fig = plt.figure()
@@ -372,3 +372,55 @@ def UL_convert_files_cyl_4_debug(input_file_paths, output_file_path, output_file
     ax.scatter(out_x, out_y, out_z,color='black')
     plt.show()
     exit()
+
+def UL_convert_files_cyl_5(input_file_paths, output_file_path, output_file_path_voxel, output_file_path_meta, Diameter, external_Diameter, seedn, chamber_height, expected_inlet_vx=6, voxel_size__=1e-3, parallel=False):
+    import stltovoxel
+    from stl import mesh
+    import numpy as np
+    meshes = []
+    for input_file_path in input_file_paths:
+        mesh_obj = mesh.Mesh.from_file(input_file_path)
+        org_mesh = np.hstack((mesh_obj.v0[:, np.newaxis], mesh_obj.v1[:, np.newaxis], mesh_obj.v2[:, np.newaxis]))
+        meshes.append(org_mesh)
+    # 
+    output = open(output_file_path, 'w')
+    output_voxel = open(output_file_path_voxel, 'w')
+    output_meta = open(output_file_path_meta, 'w')
+    # 
+    mesh_min, mesh_max = calculate_mesh_limits(meshes)
+    ROI = mesh_max-mesh_min
+    idx_L = np.argmax(ROI)
+    # 
+    resolution = int(round(ROI[idx_L]/voxel_size__))
+    voxels, scale, shift = stltovoxel.convert.convert_meshes(meshes, resolution=resolution-1, parallel=parallel)
+    voxels[0,:,:]=voxels[1,:,:]
+    voxels[voxels.shape[0]-2:,:,:]=voxels[voxels.shape[0]-3,:,:]
+    # padding
+    voxels_cut, res_vec = cut_before_inlet(voxels, scale, chamber_height, expected_inlet_vx)
+    in_x, in_y, in_z, out_x, out_y, out_z = [], [], [], [], [], []
+    for z in range(voxels_cut.shape[0]):
+        for y in range(voxels_cut.shape[1]):
+            for x in range(voxels_cut.shape[2]):
+                    point = (np.array([x, y, z]) / scale) # + shift
+                    # tag external of cylinder as ssolid to avoid flow
+                    center_cyl = np.array([Diameter/2, Diameter/2])
+                    if (np.linalg.norm([x/scale[2],y/scale[1]]-center_cyl)-(external_Diameter)/2 >= 0 and voxels_cut[z][y][x]==0):
+                        voxels_cut[z][y][x]=3
+                    output.write('%s\t%s\t%s\t' % tuple(point))
+                    output_voxel.write('%s\t' % voxels_cut[z][y][x])
+    # 
+    voxels_cut, res_vec = enforce_size_x_y(voxels_cut)
+    output_meta.write('seeding number: ')
+    output_meta.write('%s\n' % seedn)
+    output_meta.write('Voxel size = vx/m : ')
+    output_meta.write('%s\n' % np.mean(scale))
+    output_meta.write('Resolution = ')
+    output_meta.write('%s x %s x %s \n' % tuple(res_vec))
+    output_meta.write('domain dims = ')
+    output_meta.write('%s x %s x %s' % tuple(res_vec/scale))
+    output.close()
+    output_voxel.close()
+    output_meta.close()
+    from tifffile import imsave
+    tif_matrix = np.asarray(voxels_cut,dtype=np.float32)
+    imsave('voxelized_cyl_5.tif', tif_matrix)
