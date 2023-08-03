@@ -15,6 +15,7 @@ The next sub-sections briefly present the overall method for the presented pipel
 ![image](https://github.com/Th0masLavigne/Porous_media_Generation_and_properties/blob/main/Pipeline.png)
 > *Graphical representation of the route followed for the creation of the porous scaffold. Blue elements correspond to the neper environment and red elements to the pymesh environment.*
 
+**Be careful, Pymesh requires numpy.__version__ <1.25**
 
 ### Creation of a tesselation
 
