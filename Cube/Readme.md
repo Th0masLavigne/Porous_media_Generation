@@ -8,7 +8,7 @@ This folder contains the samples which were generated for [Rajabi *et al.*](http
     style="display: block; 
            margin-left: auto;
            margin-right: auto;
-           width: 30%;"
+           width: 100%;"
 src=./cube_voronoi.png
 alt="Result">
 </img>
