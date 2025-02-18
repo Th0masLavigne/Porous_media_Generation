@@ -9,8 +9,16 @@ This repository contains the codes used for:
 
 The next sub-sections briefly present the overall method for the presented pipeline. At first, a domain is tesselated. Vertices and Edges are then used to create 
 
-![image](https://github.com/Th0masLavigne/Porous_media_Generation_and_properties/blob/main/Pipeline.png)
-> *Graphical representation of the route followed for the creation of the porous scaffold. Blue elements correspond to the neper environment and red elements to the pymesh environment.*
+<img 
+    style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 100%;"
+src=./Pipeline.png
+alt="pipeline">
+</img>
+<em>*Graphical representation of the route followed for the creation of the porous scaffold. Blue elements correspond to the neper environment and red elements to the pymesh environment.*</em>
+
 
 **Be careful, Pymesh requires numpy.__version__ <1.25. The use of a container might be useful.**
 
