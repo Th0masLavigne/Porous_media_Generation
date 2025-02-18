@@ -3,7 +3,7 @@
 # https://pymesh.readthedocs.io/en/latest/
 # Done in meters
 # 
-from custom_functions_02_16_2025 import *
+from custom_functions_cylinder import *
 from custom_stl2voxel import *
 import numpy
 import os

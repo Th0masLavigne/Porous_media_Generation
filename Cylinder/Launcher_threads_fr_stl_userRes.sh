@@ -27,8 +27,8 @@ module load tools/Singularity
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 job_name=${SLURM_JOB_NAME}
-input_file=1000_07152024.py
-###input_file=1000_fr_stl.py
+input_file=main_geo_to_voxel.py
+###input_file=main_stl_to_voxel.py
 scratch_dir=$PWD
 
 ### execution

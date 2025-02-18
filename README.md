@@ -1,12 +1,9 @@
 # Porous_media_Generation_and_properties
 
-**To do update the help in custom functions codes**
-
 This repository contains the codes used for:
 
-- the generation of [porous voronoi cubes](./Cube/reamde.md) for the training of a neural network computing meniscii permeability values, 
-- the creation of [porous cylinders](./Cylinder/reamde.md) thought to be the samples for my first PhD experiment, as well as the ones for the experimental and numerical evaluation of the permeabilitty,
-- the [permeabilitty evaluation](./Permeabilitty_Evaluation/reamde.md) procedure (c and python codes)
+- the generation of [porous voronoi cubes](./Cube/reamde.md) for the training of a neural network computing meniscii permeability values ([Rajabi *et al.*](https://hdl.handle.net/10993/57127)[^1]), 
+- the creation of [porous cylinders](./Cylinder/reamde.md) for synthetic porous media structures (3D printing) and numerical evaluation of the permeabilitty ([Lavigne *et al.*](url)[^2]).
 
 ## Generation of a Porous media: pipeline
 
@@ -15,7 +12,7 @@ The next sub-sections briefly present the overall method for the presented pipel
 ![image](https://github.com/Th0masLavigne/Porous_media_Generation_and_properties/blob/main/Pipeline.png)
 > *Graphical representation of the route followed for the creation of the porous scaffold. Blue elements correspond to the neper environment and red elements to the pymesh environment.*
 
-**Be careful, Pymesh requires numpy.__version__ <1.25**
+**Be careful, Pymesh requires numpy.__version__ <1.25. The use of a container might be useful.**
 
 ### Creation of a tesselation
 
@@ -88,22 +85,26 @@ pymesh.save_mesh(output_filename, mesh, ascii=True)
 Further information can be found in [Pymesh documentation](https://pymesh.readthedocs.io/en/latest/).
 
 
+## Organisation
+```
+.
+├── ContGeoGen_V4.sif
+├── Cube
+│   ├── Readme.md
+│   ├── cube_voronoi.png
+│   ├── custom_functions_cube.py
+│   └── main.py
+├── Cylinder
+│   ├── Launcher_threads_fr_stl_userRes.sh
+│   ├── custom_functions_cylinder.py
+│   ├── custom_stl2voxel.py
+│   ├── cylinder_porous_pipeline.png
+│   ├── main_geo_to_voxel.py
+│   ├── main_stl_to_voxel.py
+│   └── readme.md
+├── Pipeline.png
+└── README.md
+```
 
-### Available functions
-Other functions are available in the custom functions:
-- create_inflated_mesh(vertices, edges, ratio, output_filename): create a wireframe and inflate it. It was not retained as we had difficulty in properly controlling the inflation when the number of seeds was high.
-- create_boolean_mesh_cyl_sph(vertices, edges, radius, Height, rad_i_tube, rad_e_tube, Length_tube, output_filename): create a tube in the middle of the domain (for my PhD experiment). Has a difference operator.
-- fix_mesh(mesh, radius, tolerance, detail=0.1,outer_hull=True): adapted from [example](https://github.com/PyMesh/PyMesh/blob/main/scripts/fix_mesh.py) and [example](https://pymesh.readthedocs.io/en/latest/api_geometry_processing.html)
-- create_boolean_mesh_cube(vertices, edges, radius, Lx, Ly, Lz, Ncyl, Nsph, output_filename): create the case for the cubic domain
-- create_merged_mesh(vertices, edges, radius, Height, output_filename): cylinders and spheres are just merged. Allows to have a quick look on the expected result for the CSG tree.
-- read_tess_file(filename): extract vertices and edges.
-- create_permeabilitty_sample(vertices, edges, radius, Height, rad_i_tube, rad_e_tube, Length_tube, Diameter, Diameter_connector_e, Diameter_connector_i, Length_connector, Ncyl, Nsph, output_filename): **BE CAREFUL with the chamber, some values are still to be changed directly inside the function for the geometry**
-- create_permeabilitty_connector(vertices, edges, radius, Height, rad_i_tube, rad_e_tube, Length_tube, Diameter, Diameter_connector_e, Diameter_connector_i, Length_connector, Ncyl, Nsph, output_filename):**BE CAREFUL with the chamber, some values are still to be changed directly inside the function for the geometry**
-
-
-One can try to give a look to [blender tesselation module](https://ryomizutagraphics.gumroad.com/l/TPMS_V1). A module exists in Fusion360 too but needs to be paid for.
-
-
-## From a surface mesh to a particle volume
-
-Camilo: cleaning and transforming
+[^1]: RAJABI, Mohammadmahdi *et al.*, Physics-informed Dynamic Graph Convolutional Neural Network with Curriculum Learning for Pore-scale Flow Simulations, https://hdl.handle.net/10993/57127
+[^2]: Lavigne, Thomas *et al.*, Titre, url
