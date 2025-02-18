@@ -16,7 +16,9 @@ alt="Result">
 [^1]: RAJABI, Mohammadmahdi *et al.*, Physics-informed Dynamic Graph Convolutional Neural Network with Curriculum Learning for Pore-scale Flow Simulations, https://hdl.handle.net/10993/57127
 
 ## Organisation
+```
 ├── Readme.md
 ├── cube_voronoi.png
 ├── custom_functions_cube.py
 ├── main.py
+```
