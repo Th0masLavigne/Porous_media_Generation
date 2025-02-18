@@ -5,6 +5,28 @@ This repository contains the codes used for:
 - the generation of [porous voronoi cubes](./Cube/reamde.md) for the training of a neural network computing meniscii permeability values ([Rajabi *et al.*](https://hdl.handle.net/10993/57127)[^1]), 
 - the creation of [porous cylinders](./Cylinder/reamde.md) for synthetic porous media structures (3D printing) and numerical evaluation of the permeabilitty ([Lavigne *et al.*](url)[^2]).
 
+
+```
+.
+├── ContGeoGen_V4.sif
+├── Cube
+│   ├── Readme.md
+│   ├── cube_voronoi.png
+│   ├── custom_functions_cube.py
+│   └── main.py
+├── Cylinder
+│   ├── Launcher_threads_fr_stl_userRes.sh
+│   ├── custom_functions_cylinder.py
+│   ├── custom_stl2voxel.py
+│   ├── cylinder_porous_pipeline.png
+│   ├── main_geo_to_voxel.py
+│   ├── main_stl_to_voxel.py
+│   └── readme.md
+├── Pipeline.png
+└── README.md
+```
+
+
 ## Generation of a Porous media: pipeline
 
 The next sub-sections briefly present the overall method for the presented pipeline. At first, a domain is tesselated. Vertices and Edges are then used to create 
@@ -93,26 +115,7 @@ pymesh.save_mesh(output_filename, mesh, ascii=True)
 Further information can be found in [Pymesh documentation](https://pymesh.readthedocs.io/en/latest/).
 
 
-## Organisation
-```
-.
-├── ContGeoGen_V4.sif
-├── Cube
-│   ├── Readme.md
-│   ├── cube_voronoi.png
-│   ├── custom_functions_cube.py
-│   └── main.py
-├── Cylinder
-│   ├── Launcher_threads_fr_stl_userRes.sh
-│   ├── custom_functions_cylinder.py
-│   ├── custom_stl2voxel.py
-│   ├── cylinder_porous_pipeline.png
-│   ├── main_geo_to_voxel.py
-│   ├── main_stl_to_voxel.py
-│   └── readme.md
-├── Pipeline.png
-└── README.md
-```
+
 
 [^1]: RAJABI, Mohammadmahdi *et al.*, Physics-informed Dynamic Graph Convolutional Neural Network with Curriculum Learning for Pore-scale Flow Simulations, https://hdl.handle.net/10993/57127
 [^2]: Lavigne, Thomas *et al.*, Titre, url
