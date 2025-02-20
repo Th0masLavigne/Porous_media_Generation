@@ -1,4 +1,4 @@
-# Porous_media_Generation_and_properties
+# Porous_media_Generation
 
 This repository contains the codes used for:
 
