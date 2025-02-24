@@ -118,4 +118,4 @@ Further information can be found in [Pymesh documentation](https://pymesh.readth
 
 
 [^1]: RAJABI, Mohammadmahdi *et al.*, Physics-informed Dynamic Graph Convolutional Neural Network with Curriculum Learning for Pore-scale Flow Simulations, https://hdl.handle.net/10993/57127
-[^2]: Lavigne, Thomas *et al.*, Titre, url
+[^2]: Lavigne, Thomas *et al.*, Synthetic Porous Microstructures: Automatic Design, Simulation, and Permeability Analysis, https://doi.org/10.48550/arXiv.2502.14518
